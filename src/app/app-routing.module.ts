@@ -8,14 +8,9 @@ import { AuthGuard } from './@auth-guard/auth-guard.service'
 import { AuthNoGuard } from './@auth-guard/auth-no-guard.service'
 export const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./root/pages.module').then(m => m.PagesModule),
-    // canActivate: [AuthGuard]
-  },
-  {
     path: 'auth',
     component: NbAuthComponent,
-    // canActivate: [AuthNoGuard],
+    canActivate: [AuthNoGuard],
     children: [
       {
         path: 'login',
@@ -23,8 +18,13 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  {
+    path: '',
+    loadChildren: () => import('./root/root.module').then(m => m.PagesModule),
+    canActivate: [AuthGuard]
+  },  
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard' },
 ];
 
 const config: ExtraOptions = {
