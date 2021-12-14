@@ -12,6 +12,10 @@ const routes: Routes = [{
       path: 'dashboard',
       component: ECommerceComponent,
     },
+     {
+      path: 'class-mang',
+      loadChildren: () => import('./class-management/class-management.module').then(m => m.ClassManagementModule),        
+    },
     // {
     //   path: 'tables',
     //   loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule),        

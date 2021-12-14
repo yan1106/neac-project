@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: '統計圖表',
     icon: 'pie-chart-outline',
-    link: '/pages/dashboard',
+    link: '/dashboard',
     home: true,
   },
   {
@@ -13,11 +13,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'BANNER列表(最新消息)',
-        link: '/pages/tables/smart-table',
-      },
-      {
-        title: 'Tree Grid',
-        link: '/pages/tables/tree-grid',
+        link: '/class-mang/banner-mang',
       },
     ],
   },

@@ -8,14 +8,14 @@ import { AuthGuard } from './@auth-guard/auth-guard.service'
 import { AuthNoGuard } from './@auth-guard/auth-no-guard.service'
 export const routes: Routes = [
   {
-    path: 'pages',
+    path: '',
     loadChildren: () => import('./root/pages.module').then(m => m.PagesModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'auth',
     component: NbAuthComponent,
-    canActivate: [AuthNoGuard],
+    // canActivate: [AuthNoGuard],
     children: [
       {
         path: 'login',
