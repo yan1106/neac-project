@@ -4,15 +4,14 @@ import { SmartTableData } from '../../../@core/data/smart-table';
 import { BannerDialogFormComponent } from '../banner-dialog-form/banner-dialog-form.component'
 import { NbDialogService } from '@nebular/theme';
 import { Observable } from 'rxjs';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'ngx-banner-mang',
   templateUrl: './banner-mang.component.html',
   styleUrls: ['./banner-mang.component.scss']
 })
 export class BannerMangComponent implements OnInit {
-  item$: Observable<any[]>;
- 
+
   settings = {
     mode: 'external',
     hideSubHeader: false,
@@ -22,7 +21,7 @@ export class BannerMangComponent implements OnInit {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',    
+      cancelButtonContent: '<i class="nb-close"></i>',
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -71,7 +70,7 @@ export class BannerMangComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData,private dialogService: NbDialogService) {
+  constructor(private service: SmartTableData, private dialogService: MatDialog) {
     const data = this.service.getData();
     this.source.load([]);
   }
@@ -87,10 +86,18 @@ export class BannerMangComponent implements OnInit {
   }
 
   openEditDialog(event): void {
-    this.dialogService.open(BannerDialogFormComponent,{});
+    this.dialogService.open(BannerDialogFormComponent, {});
   }
 
-  createDialog(): void{
-    this.dialogService.open(BannerDialogFormComponent,{});
+  createDialog(): void {
+    const dialogRef = this.dialogService.open(BannerDialogFormComponent, {
+      height: '400px',
+      width: '800px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result.title}`);
+    });
   }
 }

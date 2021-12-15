@@ -21,7 +21,13 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './root/auth/login/login.component'
 import { AuthGuard } from './@auth-guard/auth-guard.service'
-import { AuthNoGuard } from './@auth-guard/auth-no-guard.service'
+import { AuthNoGuard } from './@auth-guard/auth-no-guard.service';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { zh_TW } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh'
+
+registerLocaleData(zh);
 @NgModule({
   declarations: [AppComponent,LoginComponent],
   imports: [
@@ -38,7 +44,7 @@ import { AuthNoGuard } from './@auth-guard/auth-no-guard.service'
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
-  providers: [AuthGuard,AuthNoGuard],
+  providers: [AuthGuard,AuthNoGuard, { provide: NZ_I18N, useValue: zh_TW }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

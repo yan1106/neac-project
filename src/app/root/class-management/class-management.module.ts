@@ -9,6 +9,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NbMomentDateModule } from '@nebular/moment'
 import { BannerDialogFormComponent } from './banner-dialog-form/banner-dialog-form.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     BannerMangComponent,
@@ -21,13 +29,22 @@ import { BannerDialogFormComponent } from './banner-dialog-form/banner-dialog-fo
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    NbCardModule, 
-    NbIconModule, 
-    NbInputModule, 
+    NbCardModule,
+    NbIconModule,
+    NbInputModule,
     NbTreeGridModule,
     Ng2SmartTableModule,
     NbMomentDateModule,
-    NbDatepickerModule
-  ]
+    NbDatepickerModule,
+    NzDatePickerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule
+  ],
+  bootstrap:[]
 })
 export class ClassManagementModule { }
