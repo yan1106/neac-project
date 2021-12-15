@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: 'auth',
     component: NbAuthComponent,
-    canActivate: [AuthNoGuard],
+    // canActivate: [AuthNoGuard],
     children: [
       {
         path: 'login',
@@ -21,7 +21,7 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./root/root.module').then(m => m.PagesModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },  
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/dashboard' },
