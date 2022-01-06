@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule, NbDatepickerModule } from '@nebular/theme';
+import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule, NbDatepickerModule,NbToastrModule } from '@nebular/theme';
 import { ClassManagementRoutingModule } from './class-management-routing.module';
 import { BannerMangComponent } from './banner-mang/banner-mang.component';
 import { MatTableModule } from '@angular/material/table';
@@ -16,35 +16,66 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ClassManagementService } from './class-management.service'
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { ConfirmationDialog } from './banner-mang/confirmation-dialog.component'
+import {
+  StepBackwardOutline,
+  CaretLeftOutline,
+  SettingOutline
+} from '@ant-design/icons-angular/icons';
+import {
+  NbWindowModule
+} from '@nebular/theme';
+
+const icons: any[] = [
+  StepBackwardOutline,
+  CaretLeftOutline,
+  SettingOutline
+];
+// import { MaterialFileInputModule } from 'ngx-material-file-input';
 @NgModule({
-  declarations: [
-    BannerMangComponent,
-    BannerDialogFormComponent
-  ],
-  imports: [
-    CommonModule,
-    ClassManagementRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    NbCardModule,
-    NbIconModule,
-    NbInputModule,
-    NbTreeGridModule,
-    Ng2SmartTableModule,
-    NbMomentDateModule,
-    NbDatepickerModule,
-    NzDatePickerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDatepickerModule
-  ],
-  bootstrap:[]
+  declarations: [
+    BannerMangComponent,
+    BannerDialogFormComponent,
+    ConfirmationDialog
+  ],
+  imports: [
+    CommonModule,
+    ClassManagementRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    NbCardModule,
+    NbIconModule,
+    NbInputModule,
+    NbTreeGridModule,
+    Ng2SmartTableModule,
+    NbMomentDateModule,
+    NbDatepickerModule,
+    NzDatePickerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    NzUploadModule,
+    NzButtonModule,
+    NzIconModule.forChild(icons),
+    NzImageModule,
+    NbWindowModule.forChild(),
+    NbToastrModule.forRoot({duration: 5000}),
+    // MaterialFileInputModule
+  ],
+  exports: [NzIconModule,FormsModule],
+  providers: [ClassManagementService],
+  bootstrap: []
 })
 export class ClassManagementModule { }

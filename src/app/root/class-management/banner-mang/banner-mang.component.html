@@ -1,10 +1,10 @@
-<nb-card>
+<nb-card style="overflow-x: scroll;">
   <nb-card-header>
     BANNER列表
   </nb-card-header>
-  <nb-card-body>
+  <nb-card-body >
     <!-- <spm-table-element ></spm-table-element> -->
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+    <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDeleteConfirm($event)"
       (edit)="openEditDialog($event)" (create)="createDialog()">
     </ng2-smart-table>
   </nb-card-body>

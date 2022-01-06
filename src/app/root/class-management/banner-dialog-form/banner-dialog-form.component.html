@@ -1,34 +1,85 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>新增Banner</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="bannerForm" (ngSubmit)="submit(bannerForm)">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>標題</mat-label>
-      <input formControlName="title" matInput required>
-      <mat-error *ngIf="(bannerForm.get('title')).errors?.required">
-        標題必填!
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>開始時間</mat-label>
-      <input formControlName="startDate" matInput [matDatepicker]="pickerStart" matInput required>
-      <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-      <mat-datepicker #pickerStart></mat-datepicker>
-      <mat-error *ngIf="(bannerForm.get('startDate')).errors?.required">
-        開始時間必填!
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>結束時間</mat-label>
-      <input formControlName="endDate" [matDatepicker]="pickerEnd" matInput required>
-      <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-      <mat-datepicker #pickerEnd></mat-datepicker>
-      <mat-error *ngIf="(bannerForm.get('endDate')).errors?.required">
-        結束時間必填!
-      </mat-error>
-    </mat-form-field>
-  </form>
+  <div class="container">
+
+    <form [formGroup]="bannerForm" (ngSubmit)="submit()">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>標題</mat-label>
+            <input formControlName="title" [(ngModel)]="data.title" matInput required>
+            
+            <mat-error *ngIf="(bannerForm.get('title')).errors?.required">
+              標題必填!
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>開始時間-結束時間</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate  required readonly formControlName="startDate" [(ngModel)]="data.startDate" placeholder="Start date">
+              <input matEndDate  required readonly formControlName="endDate" [(ngModel)]="data.endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <!-- #docregion date-range-picker-actions -->
+            <mat-date-range-picker #rangePicker>
+              <!-- <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply>確認</button>
+              </mat-date-range-picker-actions> -->
+            </mat-date-range-picker>
+            <mat-error *ngIf="(bannerForm.get('endDate')).errors?.required || (bannerForm.get('startDate')).errors?.required">
+              開始時間-結束時間必填!
+            </mat-error>
+            <!-- <input formControlName="startDate" [(ngModel)]="data.startDate" matInput [matDatepicker]="pickerStart" matInput required readonly>
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+            <mat-error *ngIf="bannerForm.controls.startDate.hasError('required')">
+              開始時間必填!
+            </mat-error> -->
+            <!-- <mat-error *ngIf="(bannerForm.get('startDate')).errors?.required">
+              開始時間必填!
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        <!-- <div class="col-md-12">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>結束時間</mat-label>
+            <input formControlName="endDate" [(ngModel)]="data.endDate" [matDatepicker]="pickerEnd" matInput required readonly>
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+            <mat-error *ngIf="(bannerForm.get('endDate')).errors?.required">
+              結束時間必填!
+            </mat-error>
+          </mat-form-field>
+        </div> -->
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>連結網址</mat-label>
+            <input formControlName="link" [(ngModel)]="data.link" matInput required>
+            <mat-error *ngIf="(bannerForm.get('link')).errors?.required">
+              連結網址必填!
+            </mat-error>
+          </mat-form-field>
+        </div>      
+        <div class="col-md-12">          
+          <nz-upload  nzListType="picture" [(nzCustomRequest)]="customUploadReq"
+            [(nzFileList)]="fileList1" [nzRemove]="handleRemove">
+            <!-- <button nz-button>            
+              Upload
+            </button> -->
+            <div><i nz-icon nzType="upload"></i>Upload</div>
+          </nz-upload>
+          <div *ngIf="fileList1.length === 0" class="text-center" style="color: red;">
+            圖片未上傳!
+          </div>
+      </div>
+      </div>
+    </form>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button type="submit" (click)="submit(bannerForm)" cdkFocusInitial>Install</button>
+  <button mat-flat-button type="submit" (click)="submit()" color="primary">送出</button>
+  <button mat-button mat-dialog-close color="warn" type="button" >取消</button> 
 </mat-dialog-actions>
