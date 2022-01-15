@@ -1,28 +1,29 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { AfterViewInit, Component, OnDestroy,Input } from '@angular/core';
+import { NbThemeService,NbMediaBreakpointsService,NbMediaBreakpoint } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-echarts-pie',
-  template: `
-    <div echarts [options]="options" class="echart"></div>
-  `,
+  templateUrl: './echarts-pie.component.html',
 })
 export class EchartsPieComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
-
-  constructor(private theme: NbThemeService) {
+  breakpoint: NbMediaBreakpoint = { name: '', width: 0 };
+  breakpoints: any;
+  @Input() optionsData: any = {};
+  @Input() chartsPieTitle: string = '';
+  constructor(private theme: NbThemeService,private breakpointService: NbMediaBreakpointsService,) {
+    this.breakpoints = this.breakpointService.getBreakpointsMap();
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
-
       this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+        backgroundColor: echarts.bg,      
+        // color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+        color: [colors.warningLight, colors.infoLight, colors.successLight, colors.primaryLight],
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
@@ -30,24 +31,18 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+          data: this.optionsData.legend.data,
           textStyle: {
             color: echarts.textColor,
           },
         },
         series: [
           {
-            name: 'Countries',
+            name: this.optionsData.series.name,
             type: 'pie',
-            radius: '80%',
+            radius: '50%',
             center: ['50%', '50%'],
-            data: [
-              { value: 335, name: 'Germany' },
-              { value: 310, name: 'France' },
-              { value: 234, name: 'Canada' },
-              { value: 135, name: 'Russia' },
-              { value: 1548, name: 'USA' },
-            ],
+            data: this.optionsData.series.data,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,

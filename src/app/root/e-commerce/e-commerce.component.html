@@ -1,38 +1,40 @@
 <div class="row">
-  <div class="col-xxl-5">
+  <div class="col-xxl-12">
     <div class="row">
-      <div class="col-md-6">
-        <ngx-profit-card></ngx-profit-card>
+      <div class="col-md-3">
+        <ngx-earning-card cardTitle='會員統計' cardNgxNumber='16789'></ngx-earning-card>
       </div>
-      <div class="col-md-6">
-        <ngx-earning-card></ngx-earning-card>
+      <div class="col-md-3">
+        <ngx-earning-card cardTitle='報名統計' cardNgxNumber='17890'></ngx-earning-card>
+      </div>
+      <div class="col-md-3">
+        <ngx-earning-card cardTitle='退費統計' cardNgxNumber='16666'></ngx-earning-card>
+      </div>
+      <div class="col-md-3">
+        <ngx-earning-card cardTitle='續報統計' cardNgxNumber='15555'></ngx-earning-card>
       </div>
     </div>
-
-    <ngx-traffic-reveal-card></ngx-traffic-reveal-card>
-  </div>
-
-  <div class="col-xxl-7">
-    <ngx-ecommerce-charts></ngx-ecommerce-charts>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xxl-9">
-    <ngx-country-orders></ngx-country-orders>
-  </div>
-
-  <div class="col-xxl-3">
-    <ngx-progress-section></ngx-progress-section>
+  <div class="col-xxl-12">
+    <ngx-vistors-orders></ngx-vistors-orders>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xxl-9">
-    <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
-  </div>
-
-  <div class="col-xxl-3">
-    <ngx-user-activity></ngx-user-activity>
+  <div class="col-xxl-12">
+    <div class="row">
+      <div class="col-md-4">
+        <ngx-echarts-pie chartsPieTitle='課程分布統計' [(optionsData)]='classStatisticsOptionsData'></ngx-echarts-pie>
+      </div>
+      <div class="col-md-4">
+        <ngx-echarts-pie chartsPieTitle='會員來源統計' [(optionsData)]='memberStatisticsOptionsData'></ngx-echarts-pie>
+      </div>
+      <div class="col-md-4">
+        <ngx-echarts-pie chartsPieTitle='地區分布統計' [(optionsData)]='areaStatisticsOptionsData'></ngx-echarts-pie>
+      </div>
+    </div>
   </div>
 </div>
